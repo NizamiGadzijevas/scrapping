@@ -24,8 +24,7 @@ for page in range(1, 1 + 1):
             pareigos = blokas.find('h3', class_="list_h3").text.strip()
             imone = blokas.find('span', class_="dib mt5").text.strip()
             print(atlyginimas, pareigos, imone)
-            csv_writer.writerow([pareigos, Datlyginimas, imone])
-            csv_writer.writerow(['Pareigos', 'Atlyginimas', 'Imone'])
+            csv_writer.writerow([pareigos, atlyginimas, imone])
     #
         except:
             pass
