@@ -10,7 +10,7 @@ nr = int(numeriai.find_all('a', )[-1].text)
 
 with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
     csv_writer = csv.writer(failas)
-    csv_writer.writerow(['Pareigos', 'Atlyginimas', 'Įmonė', 'Nuoroda'])
+    csv_writer.writerow(['Pareigos', 'Atlyginimas', 'Įmonė'])
 
 for page in range(1, 1 + 1):
     url = f"https://www.cvbankas.lt/?page={page}"
