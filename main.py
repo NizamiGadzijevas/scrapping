@@ -20,13 +20,14 @@ for page in range(1, 1 + 1):
 
     for blokas in blokai:
         try:
-            atlyginimas = blokas.find('span', class_="salary_amount").text.strip()
-    #         pareigos = blokas.find('h3', class_="list_h3").text.strip()
-    #         imone = blokas.find('span', class_="dib mt5").text.strip()
-    #         # nuoroda = blokas.find('a', class_="list_a can_visited list_a_has_logo")['href']
-            print(atlyginimai)
-            # print(atlyginimai, pareigos, imone)
-    #         # csv_writer.writerow([pareigos, atlyginimas, imone])
+            atlyginimas = blokas.find('span', class_="salary_amount").text
+            pareigos = blokas.find('h3', class_="list_h3").text.strip()
+            imone = blokas.find('span', class_="dib mt5").text.strip()
+            nuoroda = blokas.find('a', class_="list_a can_visited list_a_has_logo")['href']
+            print(atlyginimas, pareigos, imone)
+    #         print(pareigos)
+    #         print(imone)
+    #         # csv_writer.writerow([pareigos, Datlyginimas, imone])
     #         csv_writer.writerow(['Pareigos', 'Atlyginimas', 'Imone'])
     #
         except:
