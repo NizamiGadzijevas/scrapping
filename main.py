@@ -16,7 +16,7 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
         url = f"https://www.cvbankas.lt/?page={page}"
         page = requests.get(url).text
         soup = BeautifulSoup(page, "html.parser")
-        blokai = soup.find_all('a', class_='list_a can_visited list_a_has_logo')
+        blokai = soup.find_all('article', class_="list_article list_article_rememberable jobadlist_list_article_rememberable jobadlist_article_vip")
 
         for blokas in blokai:
             try:
