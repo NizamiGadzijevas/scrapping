@@ -16,15 +16,18 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
         url = f"https://www.cvbankas.lt/?page={page}"
         page = requests.get(url).text
         soup = BeautifulSoup(page, "html.parser")
-        blokai = soup.find_all('div', class_="list_a_wrapper")
+        blokai = soup.find_all('a', class_='list_a can_visited list_a_has_logo')
 
         for blokas in blokai:
             try:
                 atlyginimas = blokas.find('span', class_="salary_amount").text
                 pareigos = blokas.find('h3', class_="list_h3").text.strip()
                 imone = blokas.find('span', class_="dib mt5").text.strip()
+                # nuoroda = blokas.find('a', class_='list_a can_visited list_a_has_logo')['href']
+                # print(atlyginimas, pareigos, imone, nuoroda)
                 print(atlyginimas, pareigos, imone)
-                csv_writer.writerow([pareigos, atlyginimas, imone])
+                # csv_writer.writerow([pareigos, atlyginimas, imone, nuoroda])
+                # csv_writer.writerow([pareigos, atlyginimas, imone])
         #
             except:
                 pass
