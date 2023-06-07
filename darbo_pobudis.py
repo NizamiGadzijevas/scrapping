@@ -9,7 +9,12 @@ blokai = soup.find_all('article', class_="list_article list_article_rememberable
 for blokas in blokai:
     try:
         linkas = blokas.find('a', class_="list_a can_visited list_a_has_logo")['href']
+        skelbimas = requests.get(linkas).text
+        soup = BeautifulSoup(skelbimas, 'html.parser')
+        reikalavimai = soup.find('h2', class_="heading2 jobad_subheading").get_text()
+
         # print(blokai)
-        print(linkas)
+        # print(linkas)
+        print(reikalavimai)
     except:
         pass

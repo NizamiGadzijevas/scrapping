@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import re
+
 
 page = requests.get("https://www.cvbankas.lt/?page=1").text
 doc = BeautifulSoup(page, "html.parser")
@@ -30,12 +30,6 @@ for page in range(1, 1 + 1):
                 print(atlyginimas[4:] + apmokejimo_periodiskumas, apmokejimo_budas)
             else:
                 print(atlyginimas + apmokejimo_periodiskumas, apmokejimo_budas)
-            # atl = atlyginimas.split()
-            # atl_nuo = atl[0]
-            # atl_iki = atl[1]
-            # print(atl)
-            # print(atl_nuo, atl_iki)
-            # print(atlyginimas)
 
         except:
             pass
