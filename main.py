@@ -32,6 +32,7 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
                     atl_nuo = atl[0]
                     atl_iki = atl[1]
                     # print(atl_nuo,atl_iki)
+                    print(type(atl_nuo))
                 elif "Nuo" in atlyginimas:
                     atl_nuo = atlyginimas[4:]
                     atl_iki = atlyginimas[4:]

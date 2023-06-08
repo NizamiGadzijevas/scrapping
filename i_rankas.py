@@ -1,9 +1,9 @@
 import pandas as pd
 
 #create DataFrame
-data = pd.read_csv('testas.csv', encoding="utf-8")
+data = pd.read_csv('cvbankas.csv', encoding="utf-8")
 
-data.loc[(data.apmokejimas == '€/val.'),'atlyginimas']*=8
+data.loc[(data.APMOKĖJIMO_PERIODIŠKUMAS == '€/val.'),'ATLYGINIMAS_NUO']*=8
 data.to_csv('updated_file.csv', index=False)  # Replace 'updated_file.csv' with the desired file name
 print(data)
 
