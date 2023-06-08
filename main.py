@@ -10,7 +10,7 @@ nr = int(numeriai.find_all('a', )[-1].text)
 
 with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
     csv_writer = csv.writer(failas)
-    csv_writer.writerow(['Pareigos', 'Atlyginimas', 'Įmonė', 'Nuoroda'])
+    csv_writer.writerow(['Pareigos', 'Atlyginimas_nuo', 'ATLYGINIMAS_NUO','APMOKĖJIMO_BŪDAS', 'APMOKĖJIMO_PERIODIŠKUMAS', 'ĮMONĖ', 'Nuoroda'])
 
     for page in range(1, 1 + 1):
         url = f"https://www.cvbankas.lt/?page={page}"
@@ -25,7 +25,7 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
                 apmokejimo_budas = blokas.find('span', class_="salary_calculation").text
                 linkas = blokas.find('a', class_="list_a can_visited list_a_has_logo")['href']
                 miestas = blokas.find('span', class_="list_city").text
-                profesija = blokas.find('div', class_="list_cell").text
+                profesija = blokas.find('h3', class_="list_h3").text
                 # print(profesija)
                 if '-' in atlyginimas:
                     atl = atlyginimas.split('-')
@@ -42,8 +42,8 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
                     atl_iki = atlyginimas
                     # print(atl_nuo,atl_iki)
 
-                # csv_writer.writerow([profesija, atl_nuo, atl_iki, apapmokejimo_budas, apmokejimo_periodiskumas, linkas])
-                print(atl_nuo, atl_iki, apmokejimo_budas,apmokejimo_periodiskumas, linkas)
+                csv_writer.writerow([profesija, atl_nuo, atl_iki, apmokejimo_budas, apmokejimo_periodiskumas, linkas])
+                print(profesija, atl_nuo, atl_iki, apmokejimo_budas,apmokejimo_periodiskumas, linkas)
 
             except:
                 pass
