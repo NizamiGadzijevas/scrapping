@@ -10,7 +10,7 @@ nr = int(numeriai.find_all('a', )[-1].text)
 
 with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
     csv_writer = csv.writer(failas)
-    csv_writer.writerow(['Pareigos', 'Atlyginimas_nuo', 'ATLYGINIMAS_NUO','APMOKĖJIMO_BŪDAS', 'APMOKĖJIMO_PERIODIŠKUMAS', 'ĮMONĖ', 'Nuoroda'])
+    csv_writer.writerow(['PROFESIJA', 'ATLYGINIMAS_NUO', 'ATLYGINIMAS_IKI', 'APMOKĖJIMO_PERIODIŠKUMAS', 'APMOKĖJIMO_BŪDAS', 'ĮMONĖ', 'Nuoroda'])
 
     for page in range(1, 1 + 1):
         url = f"https://www.cvbankas.lt/?page={page}"
@@ -29,22 +29,24 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
                 # print(profesija)
                 if '-' in atlyginimas:
                     atl = atlyginimas.split('-')
-                    atl_nuo = atl[0]
-                    atl_iki = atl[1]
+                    atl_nuo = float(atl[0])
+                    atl_iki = float(atl[1])
                     # print(atl_nuo,atl_iki)
-                    print(type(atl_nuo))
+                    # print(type(atl_nuo))
+
+                    # print(type(atl_nuo))
                 elif "Nuo" in atlyginimas:
-                    atl_nuo = atlyginimas[4:]
-                    atl_iki = atlyginimas[4:]
+                    atl_nuo = float(atlyginimas[4:])
+                    atl_iki = float(atlyginimas[4:])
                     # print(atl_nuo,atl_iki)
 
                 else:
-                    atl_nuo = atlyginimas
-                    atl_iki = atlyginimas
+                    atl_nuo = float(atlyginimas)
+                    atl_iki = float(atlyginimas)
                     # print(atl_nuo,atl_iki)
 
-                csv_writer.writerow([profesija, atl_nuo, atl_iki, apmokejimo_budas, apmokejimo_periodiskumas, linkas])
-                print(profesija, atl_nuo, atl_iki, apmokejimo_budas,apmokejimo_periodiskumas, linkas)
+                csv_writer.writerow([profesija, atl_nuo, atl_iki,apmokejimo_periodiskumas, apmokejimo_budas, linkas])
+                print(profesija, atl_nuo, atl_iki, apmokejimo_budas, apmokejimo_periodiskumas, linkas)
 
             except:
                 pass
