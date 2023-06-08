@@ -12,11 +12,14 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
     csv_writer = csv.writer(failas)
     csv_writer.writerow(['PROFESIJA', 'ATLYGINIMAS_NUO', 'ATLYGINIMAS_IKI', 'APMOKĖJIMO_PERIODIŠKUMAS', 'APMOKĖJIMO_BŪDAS', 'ĮMONĖ', 'Nuoroda'])
 
-    for page in range(1, 1 + 1):
+    # for page in range(1, 1 + 1):
+    for page in range(1, 5 + 1):
         url = f"https://www.cvbankas.lt/?page={page}"
         page = requests.get(url).text
         soup = BeautifulSoup(page, "html.parser")
-        blokai = soup.find_all('article', class_="list_article list_article_rememberable jobadlist_list_article_rememberable jobadlist_article_vip")
+        # blokai = soup.find_all('article', class_="list_article list_article_rememberable jobadlist_list_article_rememberable")
+        # blokai = soup.find_all('article', class_="list_article list_article_rememberable jobadlist_list_article_rememberable jobadlist_article_vip")
+        blokai = soup.find('div', id="js_id_id_job_ad_list")
 
         for blokas in blokai:
             try:
