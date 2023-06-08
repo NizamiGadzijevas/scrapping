@@ -21,9 +21,29 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
         for blokas in blokai:
             try:
                 atlyginimas = blokas.find('span', class_="salary_amount").text
-                pareigos = blokas.find('h3', class_="list_h3").text.strip()
-                imone = blokas.find('span', class_="dib mt5").text.strip()
+                apmokejimo_periodiskumas = blokas.find('span', class_="salary_period").text
+                apmokejimo_budas = blokas.find('span', class_="salary_calculation").text
                 linkas = blokas.find('a', class_="list_a can_visited list_a_has_logo")['href']
-                print(atlyginimas, pareigos, imone, linkas)
+                miestas = blokas.find('span', class_="list_city").text
+                profesija = blokas.find('div', class_="list_cell").text
+                # print(profesija)
+                if '-' in atlyginimas:
+                    atl = atlyginimas.split('-')
+                    atl_nuo = atl[0]
+                    atl_iki = atl[1]
+                    # print(atl_nuo,atl_iki)
+                elif "Nuo" in atlyginimas:
+                    atl_nuo = atlyginimas[4:]
+                    atl_iki = atlyginimas[4:]
+                    # print(atl_nuo,atl_iki)
+
+                else:
+                    atl_nuo = atlyginimas
+                    atl_iki = atlyginimas
+                    # print(atl_nuo,atl_iki)
+
+                # csv_writer.writerow([profesija, atl_nuo, atl_iki, apapmokejimo_budas, apmokejimo_periodiskumas, linkas])
+                print(atl_nuo, atl_iki, apmokejimo_budas,apmokejimo_periodiskumas, linkas)
+
             except:
                 pass
