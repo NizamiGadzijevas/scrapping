@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+import pandas as pd
+
 
 page = requests.get("https://www.cvbankas.lt/?page=1").text
 doc = BeautifulSoup(page, "html.parser")
@@ -53,3 +55,7 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
 
             except:
                 pass
+data = pd.read_csv('cvbankas.csv', encoding="utf-8")
+data.loc[(data.APMOKĖJIMO_PERIODIŠKUMAS == '€/val.'),'ATLYGINIMAS_NUO']*=160
+data.loc[(data.APMOKĖJIMO_PERIODIŠKUMAS == '€/val.'),'ATLYGINIMAS_IKI']*=160
+data.to_csv('updated_file.csv', index=False)  # Replace 'updated_file.csv' with the desired file name
