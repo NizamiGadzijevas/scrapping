@@ -75,7 +75,7 @@ NPD = np.where(ATLYGINIMAS_NUO <= 625, ATLYGINIMAS_NUO,
 
 Gyventojų_pajamų_mokestis = (ATLYGINIMAS_NUO - NPD) * 0.2
 
-mokesciai = round(Socialinio_draudimo_mokesciai + NPD + Gyventojų_pajamų_mokestis, 2)
+mokesciai = round(Socialinio_draudimo_mokesciai + Gyventojų_pajamų_mokestis, 2)
 print(mokesciai)
 data.loc[data['APMOKĖJIMO_BŪDAS'] == 'Neatskaičius mokesčių', 'ATLYGINIMAS_NUO'] -= mokesciai
 
