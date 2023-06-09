@@ -8,6 +8,7 @@ atlyginimas = int(input("Įveskite min atlyginimą: \n"))
 
 filtras = data[(data['PROFESIJA'].str.contains(profesija, case=False)) &
                (data['MIESTAS'].str.contains(miestas, case=False)) &
-               (data['ATLYGINIMAS_NUO'] > atlyginimas)]
+               (data['ATLYGINIMAS_NUO'] > atlyginimas) &
+               (data['ATLYGINIMAS_IKI'] > atlyginimas)]
 print(filtras)
 filtras.to_csv('filtras.csv', index=False)
