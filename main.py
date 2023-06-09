@@ -13,7 +13,7 @@ nr = int(numeriai.find_all('a', )[-1].text)
 
 with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
     csv_writer = csv.writer(failas)
-    csv_writer.writerow(['PROFESIJA', 'ATLYGINIMAS_NUO', 'ATLYGINIMAS_IKI', 'APMOKĖJIMO_PERIODIŠKUMAS', 'APMOKĖJIMO_BŪDAS', 'ĮMONĖ', 'Nuoroda'])
+    csv_writer.writerow(['PROFESIJA','MIESTAS', 'ATLYGINIMAS_NUO', 'ATLYGINIMAS_IKI', 'APMOKĖJIMO_PERIODIŠKUMAS', 'APMOKĖJIMO_BŪDAS', 'ĮMONĖ', 'Nuoroda'])
 
     # for page in range(1, 1 + 1):
     for page in range(1, 5 + 1):
@@ -51,8 +51,8 @@ with open("cvbankas.csv", 'w', encoding="UTF-8", newline='') as failas:
                     atl_iki = float(atlyginimas)
                     # print(atl_nuo,atl_iki)
 
-                csv_writer.writerow([profesija, atl_nuo, atl_iki,apmokejimo_periodiskumas, apmokejimo_budas, linkas])
-                print(profesija, atl_nuo, atl_iki, apmokejimo_budas, apmokejimo_periodiskumas, linkas)
+                csv_writer.writerow([profesija,miestas, atl_nuo, atl_iki,apmokejimo_periodiskumas, apmokejimo_budas, linkas])
+                print(profesija,miestas, atl_nuo, atl_iki, apmokejimo_budas, apmokejimo_periodiskumas, linkas)
 
             except:
                 pass
@@ -61,7 +61,6 @@ data = pd.read_csv('cvbankas.csv', encoding="utf-8")
 data.loc[data['APMOKĖJIMO_PERIODIŠKUMAS'] == '€/val.','ATLYGINIMAS_NUO']*=160
 data.loc[data['APMOKĖJIMO_PERIODIŠKUMAS'] == '€/val.','ATLYGINIMAS_IKI']*=160
 data.loc[data['APMOKĖJIMO_PERIODIŠKUMAS'] == '€/val.','APMOKĖJIMO_PERIODIŠKUMAS'] = "€/mėn."
-
 data.to_csv('updated_file.csv', index=False)
 
 
@@ -76,7 +75,6 @@ NPD = np.where(ATLYGINIMAS_NUO <= 625, ATLYGINIMAS_NUO,
 Gyventojų_pajamų_mokestis = (ATLYGINIMAS_NUO - NPD) * 0.2
 
 mokesciai = round(Socialinio_draudimo_mokesciai + Gyventojų_pajamų_mokestis, 2)
-print(mokesciai)
 data.loc[data['APMOKĖJIMO_BŪDAS'] == 'Neatskaičius mokesčių', 'ATLYGINIMAS_NUO'] -= mokesciai
 
 ATLYGINIMAS_IKI = data['ATLYGINIMAS_IKI']
@@ -94,5 +92,4 @@ data.loc[data['APMOKĖJIMO_BŪDAS'] == 'Neatskaičius mokesčių', 'ATLYGINIMAS_
 data.loc[data['APMOKĖJIMO_BŪDAS'] == 'Neatskaičius mokesčių', 'APMOKĖJIMO_BŪDAS'] = "Į rankas"
 
 data.to_csv('updated_file.csv', index=False)
-# print(data)
 
